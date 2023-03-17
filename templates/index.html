@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}{{data.topic}}{% endblock title %}
+
+{% block body %}
+
+{% comment %} {% for d in data %} {% endcomment %}
+<main class="container">
+  
+  <br>
+  <div class="row g-5">
+    <div class="col-md-8">
+      <h3 class="pb-4 mb-4 fst-italic border-bottom">
+        {{data.genre}} Presents
+      </h3>
+
+      <article class="blog-post">
+        <h2 class="blog-post-title mb-1">{{data.topic}}</h2>
+        <p class="blog-post-meta">{{data.time}} by <a href="#">{{data.author}} </a></p>
+
+        <p>{{data.content|safe}}</p>
+        <hr>
+        <p>{{data.content|safe}}</p>
+        </article>
+    
+
+    </div>
+
+    <div class="col-md-4">
+      <div class="position-sticky" style="top: 2rem;">
+        <div class="p-4 mb-3 bg-light rounded">
+          <h4 class="fst-italic">About the author</h4>
+          <p class="mb-0">Customize this section to tell your visitors a little bit about your publication, writers, content, or something else entirely. Totally up to you.</p>
+        </div>
+
+
+        
+        <div class="p-4">
+          <h4 class="fst-italic">Archives</h4>
+          <ol class="list-unstyled mb-0">
+            {% for d in topic%}
+            <li><a href="/{{d.userid}}">{{d.topic}}</a></li>
+            {% endfor %}
+            {% for d in author%}
+            <li><a href="/{{d.userid}}">{{d.author}}</a></li>
+            {% endfor %}
+          </ol>
+        </div>
+        {% if user.is_authenticated and user.username.split.0.lower == data.author.split.0.lower %}
+        {% comment %} {% if user.username.split.0.lower == data.author.split.0.lower %} {% endcomment %}
+        <a href = "{% url 'Updatepost' data.userid %}">update</a>
+        <a href = "{% url 'Deletepost' data.userid %}">delete</a>
+        {% elif user.is_superuser %}
+        <a href = "{% url 'Updatepost' data.userid %}">update</a>
+        <a href = "{% url 'Deletepost' data.userid %}">delete</a>
+        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
+        <div class="p-4">
+          <h4 class="fst-italic">Elsewhere</h4>
+          <ol class="list-unstyled">
+            <li><a href="/home">GitHub</a></li>
+            <li><a href="/home">Twitter</a></li>
+            <li><a href="/home">Facebook</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+{% comment %} {% endfor %} {% endcomment %}
+
+{% endblock body %}

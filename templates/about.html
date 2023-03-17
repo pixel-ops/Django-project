@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}About Page{% endblock title %}
+
+{% block body %}
+
+<center>
+    <h1>About page</h1>
+
+
+<div class="form-group container">
+    <form class="row g-3" method = "POST" action = "/about" >
+    {% csrf_token %}
+
+    {{form|crispy}}
+        <center>
+    <button class = "btn btn-primary " style="width: 800px;" type="submit">submit</button>
+        </center>
+</form>
+</div>
+</center>
+{% endblock body %}

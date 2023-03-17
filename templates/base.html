@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+      {% block head %}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock title %} | Stedpost</title>
+        <link rel="shortcut icon" href="static/favicon.png" type="image/x-icon">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+      {% endblock head %}
+      </head>
+    
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
+
+      
+    <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    
+  </head>
+  <body>
+    
+<div class="container">
+  <header class="blog-header lh-1 py-3">
+    <div class="row flex-nowrap justify-content-between align-items-center">
+      <div class="col-4 pt-1">
+        <a class="link-secondary" href="/post">add post</a>
+        
+        {% if user.is_authenticated %}
+          user:- {{ user.username }} {{user.email}}
+        {% else %}
+          user:- 
+        {% endif %}
+      </div>
+      <div class="col-4 text-center">
+        <h2><a class="blog-header-logo text-dark" style="text-decoration: none;" href="/home">Sted Post</a></h2>
+      </div>
+      <div class="col-4 d-flex justify-content-end align-items-center">
+        
+        <form class="d-flex" role="search" action="{% url 'home' %}"">
+          {% csrf_token %}
+          <input name="search" class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+          <button class="btn btn-outline-success" onclick type="submit">Search</button>
+        </form>
+        
+        
+        <a class="btn btn-sm btn-outline-secondary" href="/contact">contact Us</a>
+        <a class="btn btn-sm btn-outline-secondary" href="/about">about Us</a>
+        {% if user.is_authenticated %}
+        <a class="btn btn-sm btn-outline-secondary" href="/logout">logout</a>
+        {% else %}
+        <a class="btn btn-sm btn-outline-secondary" href="/login">Login</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-scroller py-1 mb-2">
+    <nav class="nav d-flex justify-content-between">
+      <a class="p-2 link-secondary" href="/home">World</a>
+      <a class="p-2 link-secondary" href="/home">U.S.</a>
+      <a class="p-2 link-secondary" href="/home">Technology</a>
+      <a class="p-2 link-secondary" href="/home">Design</a>
+      <a class="p-2 link-secondary" href="/home">Culture</a>
+      <a class="p-2 link-secondary" href="/home">Business</a>
+      <a class="p-2 link-secondary" href="/home">Politics</a>
+      <a class="p-2 link-secondary" href="/home">Opinion</a>
+      <a class="p-2 link-secondary" href="/home">Science</a>
+      <a class="p-2 link-secondary" href="/home">Health</a>
+      <a class="p-2 link-secondary" href="/home">Style</a>
+      <a class="p-2 link-secondary" href="/home">Travel</a>
+    </nav>
+  </div>
+</div>
+
+{% block body %}
+
+{% endblock body %}
+    
+  </body>
+</html>

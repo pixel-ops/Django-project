@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block body %}
+
+
+
+<main class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+      <div class="col-md-12 px-0">
+        <h1 class="display-4 fst-italic">Sted Post</h1>
+        <p class="lead my-3">{% lorem 1 b random %}</p>
+        <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+        {% comment %} <h1>aaa {% for i in users %}{{i.user_name}}{% endfor %}</h1> {% endcomment %}
+      </div>
+    </div>
+    
+    <div class="row mb-2">
+        {% for d in recent_posts %}
+        <div class="col-md-6" >
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">{{d.genre}}</strong>
+                
+                <h3 class="mb-0" ><div>{{d.topic}}</div></h3>
+                <div class="mb-1 text-muted">{{d.date}}</div>
+                <p class="card-text mb-auto" >{{d.content|truncatechars:150|safe}}</p>
+                <a href="/{{d.userid}}" class="stretched-link">Continue reading</a>
+              </div>
+              <div class="col-auto d-none d-lg-block">
+                {% if d.img %}
+                <img class="bd-placeholder-img" width="200" height="250" src="{{d.img.url}}" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="#55595c"/></img>
+                {% endif %} 
+              </div>
+            </div>
+          </div>  
+        
+        {% endfor %}
+    {% if page_obj.paginator.num_pages >= 2 %}
+      <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">next</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    {% endif %}
+    </div> 
+</main>
+
+
+
+
+{% endblock body %}

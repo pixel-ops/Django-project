@@ -1,0 +1,19 @@
+{% extends 'base.html' %}  
+  
+{% block body %}  
+  
+    <div class = "container form-group " style="margin-top:300px">
+
+        <center>
+            <form method="post">  
+                {% csrf_token %}  
+              
+            <p>Are you sure you want to delete "{{ object.topic }}"?</p>  
+          
+            <input type="submit" value="Confirm">  
+            </form>  
+        </center>
+
+    </div>
+  
+{% endblock body %}  
